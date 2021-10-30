@@ -17,18 +17,21 @@ class Fork {
 }
 
 class Philosopher extends Thread {
-    Debugger debug = new Debugger("Philosopher");
+    Debugger debug = new Debugger(getName());
 
     Fork left, right;
     long id;
+    String name;
 
-    public Philosopher(Fork left, Fork right) {
+
+    public Philosopher(Fork left, Fork right, String name) {
         this.left = left;
         this.right = right;
+        this.name = name;
     }
 
     public boolean takeForks() {
-        debug.debug("try take forks....");
+        debug.debug("try take forks....", name);
         if (left.take()){
             if (right.take()) {
                 return true;
@@ -42,9 +45,9 @@ class Philosopher extends Thread {
         debug.do_something(5,"eating....");
     }
 
-
     public void run() {
         id = Thread.currentThread().getId();
+
         debug.do_something(5, "running...");
         while (true) {
             debug.do_something(5,"sleeping...");
@@ -64,11 +67,11 @@ public class MyPhilosophers {
         Fork f1 = new Fork();
         Fork f2 = new Fork();
 
-        Philosopher aristoteles = new Philosopher(f1,f2);
-        Philosopher kant = new Philosopher(f1,f2);
-        Philosopher platao = new Philosopher(f1,f2);
-        Philosopher hegel = new Philosopher(f1,f2);
-        Philosopher nietzsche = new Philosopher(f1,f2);
+        Philosopher aristoteles = new Philosopher(f1,f2, "Aristoteles");
+        Philosopher kant = new Philosopher(f1,f2, "kant");
+        Philosopher platao = new Philosopher(f1,f2, "platao");
+        Philosopher hegel = new Philosopher(f1,f2, "hegel");
+        Philosopher nietzsche = new Philosopher(f1,f2, "nietzsche");
 
         aristoteles.start();
         kant.start();
