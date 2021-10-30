@@ -42,20 +42,21 @@ class Philosopher extends Thread {
     }
 
     public void eat(){
-        debug.do_something(5,"eating....");
+        debug.do_something(3,"eating....");
     }
 
     public void run() {
         id = Thread.currentThread().getId();
-
-        debug.do_something(5, "running...");
-        while (true) {
-            debug.do_something(5,"sleeping...");
+        int control = 0;
+        debug.do_something(3, "running...");
+        while ( control < 3) {
+            debug.do_something(3,"sleeping...");
 
             if(takeForks()) {
                 this.eat();
                 left.release();
                 right.release();
+                control++;
             }
         }
     }
