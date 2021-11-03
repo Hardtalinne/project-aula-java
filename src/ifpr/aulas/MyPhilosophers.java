@@ -50,7 +50,7 @@ class Philosopher extends Thread {
         int control = 0;
         debug.do_something(3, "running...");
         while ( control < 3) {
-            debug.do_something(3,"sleeping...");
+            debug.do_something(10,"sleeping...");
 
             if(takeForks()) {
                 this.eat();
